@@ -6,4 +6,6 @@ Rails.application.routes.draw do
   resources :flowers, only: [:index, :show] do
   resources :reviews, only: [:index, :create, :update , :destroy]
   end
+
+  get "*path", to: "fallback#index", constraints: ->(req) { !req.xhr? && req.format.html? }
 end
